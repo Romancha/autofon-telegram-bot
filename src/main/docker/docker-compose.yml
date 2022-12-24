@@ -1,7 +1,7 @@
 version: '2'
 services:
   autofon-bot-app:
-    image: autofon-telegram-bot:latest
+    image: trueromancha/autofon-telegram-bot:latest
     volumes:
       - /opt/autofon/:/autofon/
     environment:
