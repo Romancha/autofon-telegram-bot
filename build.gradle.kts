@@ -8,7 +8,7 @@ plugins {
 }
 
 group = "org.romancha"
-version = "1.0-SNAPSHOT"
+version = "1.0"
 
 val ktor_version: String by project
 val lets_plot_kotlin_version: String by project
