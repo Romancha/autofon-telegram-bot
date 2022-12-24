@@ -34,7 +34,7 @@ Self-hosted Телеграм бот для отслеживания устрой
 
 Запуск через [docker-compose.yml](/src/main/docker/docker-compose.yml) файл:
 
-https://github.com/Romancha/autofon-telegram-bot/blob/master/src/main/docker/app.yml#L1-L12
+https://github.com/Romancha/autofon-telegram-bot/blob/7d83bf06cbb0f98672e324e1af602015dbd29768/src/main/docker/docker-compose.yml#L1-L12
 
 В environment переменных указать обязательные
 параметры - ``AUTOFON_TELEGRAM_TOKEN``, ``AUTOFON_TELEGRAM_CHAT_ID``, ``AUTOFON_API_KEY``, ``AUTOFON_API_PASSWORD``.
