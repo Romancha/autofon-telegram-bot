@@ -27,19 +27,14 @@ Self-hosted Телеграм бот для отслеживания устрой
 
 ## Установка
 
-Для запуска бота необходимо установить [Docker](https://docs.docker.com/get-docker/)
-и [Docker Compose](https://docs.docker.com/compose/install/).
+Для запуска бота необходимо:
 
-Создать вашего бота и получить токен можно у [@BotFather](https://t.me/BotFather).
-
-Запуск через [docker-compose.yml](/src/main/docker/docker-compose.yml) файл:
-
+1. Установить [Docker](https://docs.docker.com/get-docker/) и [Docker Compose](https://docs.docker.com/compose/install/).
+2. Создать вашего бота и получить токен у [@BotFather](https://t.me/BotFather).
+3. Узнать свой `chat_id` у [@userinfobot](https://t.me/userinfobot).
+4. Заполнить [docker-compose.yml](/src/main/docker/docker-compose.yml) файл: обязательными переменными ``AUTOFON_TELEGRAM_TOKEN``, ``AUTOFON_TELEGRAM_CHAT_ID``, ``AUTOFON_API_KEY``, ``AUTOFON_API_PASSWORD``.
 https://github.com/Romancha/autofon-telegram-bot/blob/7d83bf06cbb0f98672e324e1af602015dbd29768/src/main/docker/docker-compose.yml#L1-L12
-
-В environment переменных указать обязательные
-параметры - ``AUTOFON_TELEGRAM_TOKEN``, ``AUTOFON_TELEGRAM_CHAT_ID``, ``AUTOFON_API_KEY``, ``AUTOFON_API_PASSWORD``.
-
-выполнить команду ``docker-compose up -d``
+5. выполнить команду для запуска ``docker-compose up -d``
 
 ## Доступные параметры
 
