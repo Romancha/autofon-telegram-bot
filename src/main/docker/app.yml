@@ -1,0 +1,12 @@
+version: '2'
+services:
+  autofon-bot-app:
+    image: autofon-telegram-bot:latest
+    volumes:
+      - /opt/autofon/:/autofon/
+    environment:
+      - _JAVA_OPTIONS=-Xmx256m -Xms256m
+      - AUTOFON_TELEGRAM_TOKEN=you-token
+      - AUTOFON_TELEGRAM_CHAT_ID=you-chat-id
+      - AUTOFON_API_KEY=you-autofon-api-key
+      - AUTOFON_API_PASSWORD=you-autofon-api-password

@@ -1,0 +1,17 @@
+token: token
+chatId: 0
+
+apiKey: key0
+apiPassword: pass
+
+dbFile: /autofon/autofon_db
+
+timeZone: Europe/Moscow
+
+heartbeatEnabled: false
+heartbeatIntervalSeconds: 10800
+
+checkLastUpdateIntervalSeconds: 600
+
+autofonHost: 176.9.114.139
+autofonPort: 9002
