@@ -23,7 +23,7 @@ Self-hosted Телеграм бот для отслеживания устрой
 
 <img src="images/bot_chart_temp.png" width="500px">
 
-Напряжения батареи
+Напряжение батареи
 
 <img src="images/bot_chart_volt.png" width="500px">
 
