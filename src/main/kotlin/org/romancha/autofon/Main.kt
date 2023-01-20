@@ -1,10 +1,10 @@
 package org.romancha.autofon
 
-import dev.inmo.micro_utils.coroutines.subscribeSafelyWithoutExceptions
 import dev.inmo.tgbotapi.extensions.api.bot.setMyCommands
 import dev.inmo.tgbotapi.extensions.api.send.reply
 import dev.inmo.tgbotapi.extensions.api.telegramBot
 import dev.inmo.tgbotapi.extensions.behaviour_builder.buildBehaviourWithLongPolling
+import dev.inmo.tgbotapi.extensions.behaviour_builder.triggers_handling.onCommand
 import dev.inmo.tgbotapi.extensions.behaviour_builder.triggers_handling.onContentMessage
 import dev.inmo.tgbotapi.extensions.behaviour_builder.triggers_handling.onMessageDataCallbackQuery
 import dev.inmo.tgbotapi.extensions.utils.withContent
@@ -75,7 +75,9 @@ suspend fun main() {
             }
         }
 
-        onMessageDataCallbackQuery {
+        onMessageDataCallbackQuery(
+            initialFilter = filterByChaIdCallback
+        ) {
             log.debug { "Callback query: $it" }
 
             val incoming = it.data
@@ -124,7 +126,7 @@ suspend fun main() {
             val lastUpdateState = mutableMapOf<Long, Long>()
 
             while (true) {
-                sendVehicleUpdates(lastUpdateState)
+                sendNewVehicleStatus(lastUpdateState)
                 delay(TimeUnit.SECONDS.toMillis(BotProps.checkLastUpdateIntervalSeconds))
             }
         }
@@ -135,8 +137,9 @@ suspend fun main() {
             BotCommand("states_summary", "Сводка по сохраненным состояниям")
         )
 
-        onSecureCommand("start") {
-            StartMessage.send(bot)
+        onCommand("start") {
+            log.info { "Call start commandL ${it.chat.id}" }
+            StartMessage.send(bot, it.chat.id)
         }
 
         onSecureCommand("charts") {
@@ -145,10 +148,6 @@ suspend fun main() {
 
         onSecureCommand("states_summary") {
             VehicleStateDataSummaryMessage.send(bot)
-        }
-
-        allUpdatesFlow.subscribeSafelyWithoutExceptions(this) {
-            log.debug { "Update: $it" }
         }
     }.join()
 

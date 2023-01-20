@@ -12,8 +12,8 @@ import org.jetbrains.letsPlot.letsPlot
 import org.jetbrains.letsPlot.scale.scaleFillGradient2
 import org.jetbrains.letsPlot.scale.scaleXDateTime
 import org.romancha.autofon.BotProps
-import org.romancha.autofon.api.dto.Vehicle
 import org.romancha.autofon.api.dto.State
+import org.romancha.autofon.api.dto.Vehicle
 import java.time.ZonedDateTime
 import java.util.*
 
@@ -38,15 +38,15 @@ object Charts {
         )
     }
 
-    private fun temperatureBar(vehicle: Vehicle, states: List<State>): InputFile? {
-        if (states.isEmpty()) {
+    private fun temperatureBar(vehicle: Vehicle, stateOriginals: List<State>): InputFile? {
+        if (stateOriginals.isEmpty()) {
             return null
         }
 
         val temps = mutableListOf<Int>()
         val time = mutableListOf<ZonedDateTime>()
 
-        states.forEach {
+        stateOriginals.forEach {
             temps.add(it.temp)
 
             val unixTime = it.lastUpdate * 1000L
@@ -87,15 +87,15 @@ object Charts {
         return InputFile(MPPFile(barImage))
     }
 
-    private fun batteryVoltageLine(vehicle: Vehicle, states: List<State>): InputFile? {
-        if (states.isEmpty()) {
+    private fun batteryVoltageLine(vehicle: Vehicle, stateOriginals: List<State>): InputFile? {
+        if (stateOriginals.isEmpty()) {
             return null
         }
 
         val voltage = mutableListOf<Double>()
         val time = mutableListOf<ZonedDateTime>()
 
-        states.forEach {
+        stateOriginals.forEach {
             voltage.add(it.batteryVoltage.toDouble() / 1000)
 
             val unixTime = it.lastUpdate * 1000L
@@ -127,15 +127,15 @@ object Charts {
         return InputFile(MPPFile(barImage))
     }
 
-    private fun batteryConsumptionLine(vehicle: Vehicle, states: List<State>): InputFile? {
-        if (states.isEmpty()) {
+    private fun batteryConsumptionLine(vehicle: Vehicle, stateOriginals: List<State>): InputFile? {
+        if (stateOriginals.isEmpty()) {
             return null
         }
 
         val consumption = mutableListOf<Int>()
         val time = mutableListOf<ZonedDateTime>()
 
-        states.forEach {
+        stateOriginals.forEach {
             consumption.add(it.batteryConsumption / 1000)
 
             val unixTime = it.lastUpdate * 1000L

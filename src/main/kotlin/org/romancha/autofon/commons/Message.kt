@@ -5,6 +5,7 @@ import dev.inmo.tgbotapi.extensions.api.send.sendMessage
 import dev.inmo.tgbotapi.extensions.utils.types.buttons.replyKeyboard
 import dev.inmo.tgbotapi.extensions.utils.types.buttons.simpleButton
 import dev.inmo.tgbotapi.types.ChatId
+import dev.inmo.tgbotapi.types.ChatIdentifier
 import dev.inmo.tgbotapi.types.buttons.KeyboardMarkup
 import dev.inmo.tgbotapi.utils.row
 import org.romancha.autofon.BotProps
@@ -16,9 +17,9 @@ abstract class Message(
     private val silent: Boolean = false
 ) {
 
-    suspend fun send(bot: TelegramBot) {
+    suspend fun send(bot: TelegramBot, chatId: ChatIdentifier = ChatId(BotProps.chaId)) {
         bot.sendMessage(
-            chatId = ChatId(BotProps.chaId),
+            chatId = chatId,
             text = message(),
             replyMarkup = replyMarkup,
             disableNotification = silent
@@ -30,9 +31,11 @@ abstract class Message(
 object StartMessage : Message(
     message = {
         """
-        🖖 Привет, я бот AutoFon.
+        🖖 Привет, это бот AutoFon.
         Я слежу за состоянием ваших устройств 🚗 и отправляю уведомления при обновлении данных.
-        А еще я умею рисовать исторические графики 📈.
+        А еще я умею рисовать исторические графики 📈 и предупреждать о маленьком балансе 💵 на sim-карте.
+        
+        Я open source и self-hosted, исходный код доступен по ссылке: https://github.com/Romancha/autofon-telegram-bot
         """.trimIndent()
     },
     replyMarkup = replyKeyboard(resizeKeyboard = true, oneTimeKeyboard = false) {

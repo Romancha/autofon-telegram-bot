@@ -18,7 +18,7 @@ repositories {
 }
 
 dependencies {
-    implementation("dev.inmo:tgbotapi:4.2.2")
+    implementation("dev.inmo:tgbotapi:4.2.4")
 
     implementation("io.github.microutils:kotlin-logging-jvm:3.0.4")
     implementation("org.slf4j:slf4j-simple:2.0.5")
@@ -28,6 +28,8 @@ dependencies {
     implementation("io.ktor:ktor-serialization-kotlinx-json:$ktor_version")
     implementation("io.ktor:ktor-client-okhttp:$ktor_version")
     implementation("io.ktor:ktor-client-logging:$ktor_version")
+
+    implementation("com.jayway.jsonpath:json-path:2.7.0")
 
     implementation("org.jetbrains.lets-plot:lets-plot-kotlin-jvm:$lets_plot_kotlin_version")
     implementation("org.jetbrains.lets-plot:lets-plot-image-export:2.5.1")

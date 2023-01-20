@@ -16,6 +16,7 @@ object BotProps {
     val heartbeatEnabled: Boolean
     val heartbeatIntervalSeconds: Long
     val checkLastUpdateIntervalSeconds: Long
+    val simBalanceAlarmThreshold: Double
 
     init {
         val properties = Properties()
@@ -49,5 +50,8 @@ object BotProps {
 
         checkLastUpdateIntervalSeconds = System.getenv("AUTOFON_CHECK_LAST_UPDATE_INTERVAL_SECONDS")?.toLong()
             ?: properties.getProperty("checkLastUpdateIntervalSeconds").toLong()
+
+        simBalanceAlarmThreshold = System.getenv("AUTOFON_SIM_BALANCE_ALARM_THRESHOLD")?.toDouble()
+            ?: properties.getProperty("simBalanceAlarmThreshold").toDouble()
     }
 }

@@ -56,7 +56,7 @@ suspend fun TelegramBot.sendCharts() {
     }
 }
 
-suspend fun TelegramBot.sendVehicleUpdates(lastUpdateState: MutableMap<Long, Long>) {
+suspend fun TelegramBot.sendNewVehicleStatus(lastUpdateState: MutableMap<Long, Long>) {
     LastStatesManager.syncLastStates()
 
     VehiclesListener.list().forEach { vehicle ->
@@ -93,8 +93,20 @@ suspend fun TelegramBot.sendVehicleUpdates(lastUpdateState: MutableMap<Long, Lon
 
                 sendLocation(
                     chatId = ChatId(BotProps.chaId),
-                    location = location
+                    location = location,
+                    disableNotification = true
                 )
+
+                val oneOfSimHasCriticalBalance =
+                    state.simCards.any { sim -> sim.balance < BotProps.simBalanceAlarmThreshold }
+                if (oneOfSimHasCriticalBalance) {
+                    sendMessage(
+                        chatId = ChatId(BotProps.chaId),
+                        text = "❗Внимание❗ На одной из симкарт устройства ${vehicle.name} осталось меньше " +
+                                "${BotProps.simBalanceAlarmThreshold} единиц баланса.\nТекущий баланс: " +
+                                state.simCards.joinToString { sim -> sim.balance.toString() }
+                    )
+                }
             }
         }
     }

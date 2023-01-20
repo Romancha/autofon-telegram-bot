@@ -8,11 +8,13 @@ import dev.inmo.tgbotapi.extensions.behaviour_builder.filters.MessageFilterByCha
 import dev.inmo.tgbotapi.extensions.behaviour_builder.triggers_handling.CommonMessageFilter
 import dev.inmo.tgbotapi.extensions.behaviour_builder.triggers_handling.command
 import dev.inmo.tgbotapi.extensions.behaviour_builder.triggers_handling.onCommandWithArgs
+import dev.inmo.tgbotapi.extensions.behaviour_builder.utils.SimpleFilter
 import dev.inmo.tgbotapi.extensions.behaviour_builder.utils.marker_factories.ByChatMessageMarkerFactory
 import dev.inmo.tgbotapi.extensions.behaviour_builder.utils.marker_factories.MarkerFactory
 import dev.inmo.tgbotapi.types.message.abstracts.Message
 import dev.inmo.tgbotapi.types.message.content.TextContent
 import dev.inmo.tgbotapi.types.message.content.TextMessage
+import dev.inmo.tgbotapi.types.queries.callback.MessageDataCallbackQuery
 import dev.inmo.tgbotapi.types.update.abstracts.Update
 import kotlinx.coroutines.Job
 import org.romancha.autofon.BotProps
@@ -21,6 +23,7 @@ val filterByChatId = CommonMessageFilter<TextContent> { it.chat.id.chatId == Bot
 val filterByChatIdMsg = BehaviourContextAndTwoTypesReceiver<Boolean, Message, Update> { message, _ ->
     BotProps.chaId == message.chat.id.chatId
 }
+val filterByChaIdCallback = SimpleFilter<MessageDataCallbackQuery> { it.message.chat.id.chatId == BotProps.chaId }
 
 suspend fun <BC : BehaviourContext> BC.onSecureCommand(
     command: String,

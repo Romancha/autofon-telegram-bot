@@ -11,6 +11,8 @@ timeZone: Europe/Moscow
 heartbeatEnabled: false
 heartbeatIntervalSeconds: 10800
 
+simBalanceAlarmThreshold: 30
+
 checkLastUpdateIntervalSeconds: 600
 
 autofonHost: 176.9.114.139

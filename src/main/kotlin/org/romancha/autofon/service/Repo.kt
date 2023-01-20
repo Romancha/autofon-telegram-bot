@@ -9,6 +9,7 @@ import org.mapdb.Serializer
 import org.romancha.autofon.BotProps
 import org.romancha.autofon.api.dto.State
 import org.romancha.autofon.api.dto.Vehicle
+import org.romancha.autofon.api.dto.jsonToState
 import org.romancha.autofon.format
 
 object Repo {
@@ -31,7 +32,7 @@ object Repo {
             val states = db.indexTreeList("states_$vehicleId", Serializer.STRING).createOrOpen()
 
             states.toList().filterNotNull().map {
-                format.decodeFromString(it)
+                it.jsonToState()
             }
         }
     }

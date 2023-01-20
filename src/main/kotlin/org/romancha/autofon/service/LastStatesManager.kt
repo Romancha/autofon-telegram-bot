@@ -5,6 +5,7 @@ import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.JsonArray
 import mu.KotlinLogging
 import org.romancha.autofon.api.dto.State
+import org.romancha.autofon.api.dto.StateOriginal
 import org.romancha.autofon.api.dto.Vehicle
 import org.romancha.autofon.api.rest.AutofonController
 import org.romancha.autofon.format
@@ -38,7 +39,7 @@ object LastStatesManager {
         }
 
         for (node in format.decodeFromString<JsonArray>(lastStatesData)) {
-            val (id, lastUpdate) = format.decodeFromJsonElement(State.serializer(), node)
+            val (id, lastUpdate) = format.decodeFromJsonElement(StateOriginal.serializer(), node)
 
             val localLastState = getLastStateForVehicle(id)
             if (localLastState == null || localLastState.lastUpdate < lastUpdate) {
