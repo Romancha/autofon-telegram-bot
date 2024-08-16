@@ -18,7 +18,7 @@ jobs:
           distribution: 'temurin'
 
       - name: Setup Gradle
-        uses: gradle/gradle-build-action@v2
+        uses: gradle/gradle-build-action@v3
 
       - name: Make gradlew executable
         run: chmod +x ./gradlew
@@ -27,4 +27,4 @@ jobs:
         run: ./gradlew build
 
       - name: Execute Gradle jib
-        run: ./gradlew jib -Djib.to.image=${{ secrets.DOCKER_HUB_USERNAME }}/autofon-telegram-bot:latest -Djib.to.auth.username=${{ secrets.DOCKER_HUB_USERNAME }} -Djib.to.auth.password=${{ secrets.DOCKER_HUB_PASSWORD }}
+        run: ./gradlew jib -Djib.to.image=${{ secrets.DOCKER_HUB_USERNAME }}/autofon-telegram-bot:latest -Djib.to.auth.username=${{ secrets.DOCKER_HUB_USERNAME }} -Djib.to.auth.password=${{ secrets.DOCKER_HUB_PASSWORD }} -Djib.from.platforms=linux/amd64,linux/arm64
